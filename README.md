@@ -19,6 +19,9 @@ npm i -S @careteen/lan-react
 // TODO add
 ```
 
+TODO
+- [x] [Tree](./packages/tree)
+
 ## issue模板
 
 - [Issue Template](./ISSUETEMPLATE.md)

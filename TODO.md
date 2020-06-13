@@ -1,7 +1,7 @@
 # 计划列表
 
 - [ ] 完成更多组件
-  - [ ] tree
+  - [x] tree
   - [ ] button
   - [ ] icon
   - [ ] input
