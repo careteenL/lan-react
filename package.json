@@ -1,0 +1,59 @@
+{
+  "name": "lan-react",
+  "version": "1.0.0",
+  "description": "A React.js UI Toolkit for Web",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/careteenL/lan-react.git"
+  },
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "author": "CareteenL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/careteenL/lan-react/issues"
+  },
+  "homepage": "https://github.com/careteenL/lan-react#readme",
+  "dependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^26.0.0",
+    "@types/qs": "^6.9.3",
+    "axios": "^0.19.2",
+    "css-loader": "^3.5.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "less": "^3.11.3",
+    "less-loader": "^6.1.1",
+    "qs": "^6.9.4",
+    "source-map-loader": "^1.0.0",
+    "style-loader": "^1.2.1",
+    "ts-jest": "^26.1.0",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
