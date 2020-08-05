@@ -22,6 +22,10 @@ npm i -S @careteen/lan-react
 TODO
 - [x] [Tree](./packages/tree)
 
+## FAQ
+
+- [FAQ](./FAQ.md)
+
 ## issue模板
 
 - [Issue Template](./ISSUETEMPLATE.md)
