@@ -1,5 +1,6 @@
 import React from 'react';
-import Upload from './components/upload';
+import Upload from './components/Upload';
+import 'antd/dist/antd.css'
 
 const App = () => {
   return (
