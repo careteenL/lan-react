@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 const App = () => {
   return (
     <div className="app">
-      <Upload />
+      <Upload accept={[]} />
     </div>
   )
 }

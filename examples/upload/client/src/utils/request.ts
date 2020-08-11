@@ -4,6 +4,8 @@ export interface Config {
   method?: string;
   headers?: any;
   data?: any;
+  onProgress?: any;
+  setXhr?: any;
 }
 
 export const request = (conf: Config): Promise<any> => {
@@ -24,6 +26,7 @@ export const request = (conf: Config): Promise<any> => {
       }
     }
     xhr.responseType = 'json';
+    xhr.upload.onprogress = config.onProgress;
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -32,6 +35,9 @@ export const request = (conf: Config): Promise<any> => {
           reject(xhr.response);
         }
       }
+    }
+    if (config.setXhr) {
+      config.setXhr(xhr);
     }
     xhr.send(config.data);
   })
