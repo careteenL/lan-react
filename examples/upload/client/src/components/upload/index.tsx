@@ -40,7 +40,7 @@ enum UploadStatus {
   PAUSE,
 }
 
-const DEAFULT_SIZE = 1024 * 1024 * 10;
+const DEAFULT_SIZE = 1024 * 1024 * 100;
 
 const isImage = (type: string = ''): boolean => type.includes('image')
 
@@ -80,6 +80,7 @@ const Upload: React.FC<UploadProps> = (props) => {
   const [currentFile, setCurrentFile] = useState<CurrentFile>();
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>(UploadStatus.INIT);
   const [hashPercent, setHashPercent] = useState<number>(0);
+  const [totalPercent, setTotalPercent] = useState<number>(0);
   const [partList, setPartList] = useState<Part[]>([]);
   const [fileName, setFileName] = useState<string>('')
 
@@ -161,6 +162,9 @@ const Upload: React.FC<UploadProps> = (props) => {
         part.percent = Number(((part.loaded! + event.loaded) / part.chunk.size * 100).toFixed(2));
         console.log('part percent: ', part.percent)
         setPartList([...partList])
+        setTotalPercent(partList.length > 0 
+          ? partList.reduce((memo: number, curr: Part) => memo + curr.percent!, 0) / partList.length
+          : 0)
       },
       data: part.chunk.slice(part.loaded),
     }))
@@ -170,6 +174,7 @@ const Upload: React.FC<UploadProps> = (props) => {
     setTimeout(() => {
       setUploadStatus(UploadStatus.INIT)
       setHashPercent(0)
+      setTotalPercent(0)
       setPartList([])
       setFileName('')
     }, 2000)
@@ -280,9 +285,9 @@ const Upload: React.FC<UploadProps> = (props) => {
     }
   ]
 
-  const totalPercent = partList.length > 0 
-    ? partList.reduce((memo: number, curr: Part) => memo + curr.percent!, 0) / partList.length
-    : 0
+  // const totalPercent = partList.length > 0 
+  //   ? partList.reduce((memo: number, curr: Part) => memo + curr.percent!, 0) / partList.length
+  //   : 0
 
   return (
     <div>

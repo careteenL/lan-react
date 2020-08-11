@@ -3,7 +3,7 @@ import fs, { WriteStream } from 'fs-extra'
 
 export const PUBLIC_DIR = path.resolve(__dirname, 'public')
 export const TEMP_DIR = path.resolve(__dirname, 'temp')
-const DEAFULT_SIZE = 1024 * 1024 * 10;
+const DEAFULT_SIZE = 1024 * 1024 * 100;
 
 const getIndex = (str: string) => {
   const matched = str.match(/-(\d{1,})$/)
