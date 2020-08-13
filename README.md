@@ -21,6 +21,7 @@ npm i -S @careteen/lan-react
 
 TODO
 - [x] [Tree](./packages/tree)
+- [x] [Upload](./packages/upload)
 
 ## FAQ
 
