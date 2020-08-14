@@ -33,6 +33,8 @@
 
 技术栈主要是前端：`React、AntD、Typescript`；服务端：`TS-Node、Express...`。
 
+> 文章首发于[@lan-react/upload](https://github.com/careteenL/lan-react/tree/master/packages/upload)，转载请注明来源。[客户端代码存放](https://github.com/careteenL/lan-react/tree/master/examples/upload/client)、[服务端代码存放](https://github.com/careteenL/lan-react/tree/master/examples/upload/server)。
+
 ### 实现小文件整体上传
 
 #### 搭建前端环境
@@ -722,4 +724,25 @@ const uploadParts = async (partList: Part[], fileName: string) => {
 
 ### 总结
 
-TODO
+- 小文件上传使用[FormData](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData)，大文件上传设置`'Content-Type': 'application/octet-stream'`。`FormData`可携带参数，`octet-stream`参数可设置在url中。
+```ts
+formData.append('file', currentFile?.file as File)
+formData.append('name', currentFile?.file.name as string)
+
+request({ url: `/partUpload/${fileName}/${part.loaded}/${part.chunkName}` })
+```
+
+- 由于[File](https://developer.mozilla.org/zh-CN/docs/Web/API/File)继承自`Blob`，客户端可使用[Blob.slice](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/slice)对大文件进行分割；服务端对分片文件存储，提供合并接口按切割顺序进行合并（使用`createWriteStream/createReadStream`）。
+
+- 为了实现秒传功能，需要对文件进行唯一标识，服务端校验为已上传文件直接返回成功和访问地址。
+  - 使用[Worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Worker)创建后台任务计算大文件唯一标识，避免页面卡死。
+  - 使用[Spark-md5](https://github.com/satazor/js-spark-md5)计算文件唯一标识`MD5`
+
+- 提供进度条功能
+  - 计算`MD5`时可借助`Worker.postMessage`按分片粒度通知前端计算进度
+  - 上传分片可借助[xhr.upload.onprogress](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/upload)实时通知前端上传进度
+  - 前端借助`Antd-Progress/Table`展示进度条
+
+- 提供暂停/恢复功能
+  - 暂停借助[xhr.abort()](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/abort)终止请求
+  - 重新上传获取上传情况，再只上传未上传部分。在服务端读取上传分片情况，客户端上传时再次借助`Blob.slice(part.loaded)`。服务端存储时按`fs.createWriteStream(filePath, { start: Number(start), flags: 'a' })`进行追加文件。
